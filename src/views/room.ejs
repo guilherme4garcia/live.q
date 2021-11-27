@@ -18,6 +18,9 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- SCRIPTS -->
+    <script src="scripts/main.js" defer type='module'></script>
   </head>
   <body>
     <div class="content" id="room">
@@ -31,7 +34,7 @@
         
 
         <div class="buttons">
-          <div class="button outlined">
+          <div class="button outlined" id="room-id" data-id="323243">
             #323243
             <img src="images/copy_1.svg" alt="Copiar numero da sala">
           </div>
@@ -142,11 +145,11 @@
         <h2>Excluir pergunta</h2>
         <p>Tem certeza que você deseja excluir esta pergunta?</p>
 
-        <form action="">
+        <form action="#" method='POST'>
           <label class="screen-only" for-id="password">Digite sua senha admin</label>
           <input type="password" name="password" placeholder="Digite sua senha"/>
           <div class="buttons">
-            <div class="button grey">Cancelar</div>
+            <div class="button grey cancel">Cancelar</div>
             <button class="red">Sim, excluir</button>
           </div>
         </form>

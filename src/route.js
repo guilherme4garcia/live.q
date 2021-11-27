@@ -2,7 +2,7 @@ const express = require('express')
 const route = express.Router()
 
 route.get('/', (req, res) => {
-  res.render('index')
+  res.render('home')
 })
 
 route.get('/room', (req, res) => {
@@ -13,6 +13,9 @@ route.get('/create-pass', (req, res) => {
   res.render('create-pass')
 })
 
-route.get('/')
+
+// route.post('/room/:room/:question/:action', (req, res) => {
+//   res.render()
+// })
 
 module.exports = route
