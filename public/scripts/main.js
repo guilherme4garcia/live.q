@@ -10,34 +10,41 @@ const modalButton = document.querySelector('.modal button')
 const checkButtons = document.querySelectorAll('.actions a.check')
 
 checkButtons.forEach(button => {
-    // adcionar a escuta
-    button.addEventListener('click', handleClick)
-});
-
+  // adcionar a escuta
+  button.addEventListener('click', handleClick)
+})
 
 const deleteButton = document.querySelectorAll('.actions a.delete')
 
 deleteButton.forEach(button => {
-    button.addEventListener('click', (event) => handleClick(event, false))
-});
+  button.addEventListener('click', event => handleClick(event, false))
+})
 
-function handleClick(event, check = true){
+function handleClick(event, check = true) {
+  event.preventDefault()
 
+  const slug = check ? 'check' : 'delete'
+  const roomId = document.querySelector('#room-id').dataset.id
+  const questionId = event.target.dataset.id
 
-    
-    event.preventDefault()
+  const form = document.querySelector('.modal form')
+  form.setAttribute('action', `/question/${roomId}/${questionId}/${slug}`)
 
-    const slug = check ? 'check' : 'delete'
-    const roomId = document.querySelecetor('#room-id').dataset.id
+  modalTitle.innerHTML = check ? 'Marcar como lido' : 'Excluir essa pergunta'
+  modalDescription.innerHTML = check
+    ? 'Tem certeza que deseja marcar como lida esta pergunta?'
+    : 'Tem certeza que deseja excluir esta pergunta?'
+  modalButton.innerHTML = check ? 'Sim, marcar como lida' : 'Sim, excluir'
 
-    const form = document.querySelector('.modal form')
-    form.setAttribute('action', `/room/${roomId}/:question/${slug}`)
+  check ? modalButton.classList.remove('red') : modalButton.classList.add('red')
 
-    modalTitle.innerHTML = check ? 'Marcar como lido' : 'Excluir essa pergunta'
-    modalDescription.innerHTML = check ? 'Tem certeza que deseja marcar como lida esta pergunta?' : 'Tem certeza que deseja excluir esta pergunta?'
-    modalButton.innerHTML = check ? 'Sim, marcar como lida' : 'Sim, excluir'
+  modal.open()
+}
 
-    check ? modalButton.classList.remove('red') : modalButton.classList.add('red')
-    
-    modal.open()
+document.getElementById('room-id').addEventListener('click', clipboardCopy)
+function clipboardCopy() {
+  let text = document.getElementById('room-id')
+  let roomId = text.getAttribute('data-id')
+
+  navigator.clipboard.writeText(roomId)
 }
